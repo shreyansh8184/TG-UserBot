@@ -283,3 +283,20 @@ async def git_repo(event: NewMessage.Event) -> None:
         LOGGER.debug(e)
         remote_url = "https://github.com/kandnub/TG-UserBot/"
     await event.answer(f"[TG-UserBot]({remote_url})")
+    
+@client.onMessage(
+    command=("google", plugin_category),
+    outgoing=True, regex="google(?: |$)(.*)$"
+)
+async def googlexxx(message):
+        await message.edit("<i>Searching..</i>")
+        search_args = (utils.get_arg(message), 1)
+        gsearch = GoogleSearch()
+        gresults = await gsearch.async_search(*search_args)
+        text = ""
+        try:
+            for i in range(6):
+                text +=  f"<b>◍ {gresults['titles'][i].upper()} :</b>\n\n<i>{gresults['descriptions'][i]}</i>\n\n{gresults['links'][i]}\n\n"
+        except IndexError:
+            pass
+        await message.edit(text, link_preview=False)
