@@ -22,6 +22,7 @@ import io
 import PIL
 import re
 import requests
+from search_engine_parser import GoogleSearch
 
 from telethon import utils
 from telethon.tl import functions, types
